@@ -1,0 +1,85 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main
+{
+  public static void main(String[] args)
+  {
+    ArrayList<String> theStringArrayList = new ArrayList<String>();
+    theStringArrayList.add("dogs");
+    theStringArrayList.add("monkeys");
+    theStringArrayList.add("cats");
+    System.out.println(theStringArrayList);
+    shiftLeft(theStringArrayList);
+    System.out.println(theStringArrayList);
+
+    ArrayList<Integer> theIntegerArrayList = new ArrayList<Integer>();
+    theIntegerArrayList.add(2);
+    theIntegerArrayList.add(5);
+    theIntegerArrayList.add(7);
+    theIntegerArrayList.add(5);
+
+    ArrayList<Integer> theIntegerArrayList2 = new ArrayList<Integer>();
+    theIntegerArrayList2.add(1);
+    theIntegerArrayList2.add(5);
+    theIntegerArrayList2.add(9);
+    theIntegerArrayList2.add(5);
+    theIntegerArrayList2.add(1);
+
+    printStatistics(theIntegerArrayList);
+    printStatistics(theIntegerArrayList2);
+  }
+
+  public static void shiftLeft(ArrayList<String> theStringArrayList)
+  {
+    String theShiftRemoval = theStringArrayList.remove(0);
+    theStringArrayList.add(theShiftRemoval);
+  }
+
+  public static void printStatistics(final ArrayList<Integer> theIntegerArrayList)
+  {
+    boolean uniqueMode = true;
+    int theCurrHigh = 0;
+    int theCount = 0;
+    int theMode = 0;
+    int modeCounter = 0;
+    int theSum = 0;
+    double theAvg;
+
+    for (int i = 0; i < theIntegerArrayList.size(); i++)
+    {
+      theCount = 0;
+      for (int j = i+1; j < theIntegerArrayList.size(); j++)
+      {
+        if (theIntegerArrayList.get(i) == theIntegerArrayList.get(j))
+        {
+          theCount++;
+        }
+      }
+      if (theCount == theCurrHigh)
+      {
+        modeCounter++; 
+      }
+      if (theCount > theCurrHigh)
+      {
+        theMode = theIntegerArrayList.get(i);
+        theCurrHigh = theCount; 
+        modeCounter = 0;
+      }
+
+
+      theSum += theIntegerArrayList.get(i);
+    }
+    theAvg = ((double) theSum)/theIntegerArrayList.size();
+    System.out.println("Sum: " + theSum + "\n" + "Average: " + theAvg);
+    if (modeCounter == 0)
+    {
+      System.out.println("Mode: " + theMode);
+    }
+    else
+    {
+      System.out.println("Mode: no single mode");
+    }
+    
+  }
+}
